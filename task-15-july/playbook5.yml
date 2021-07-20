@@ -1,0 +1,24 @@
+---
+ - name: Deploy Apache_server
+   hosts: all
+   tasks:
+     - name: Print System info    
+       debug:
+         msg: 
+           - Hostname "{{ ansible_nodename }}"
+           - no of processor "{{ ansible_processor_count }}"
+           - no of cores "{{ ansible_processor_cores }}"
+           - os family "{{ ansible_os_family }}"
+           - Default IPV4 Address "{{ ansible_default_ipv4.address }}"  
+           - Ansible Default NIC Address "{{ ansible_eth0.macaddress }}"
+
+     - name: Save System info    
+       copy:
+         content: 
+           - Hostname "{{ ansible_nodename }}"
+           - no of processor "{{ ansible_processor_count }}"
+           - no of cores "{{ ansible_processor_cores }}"
+           - os family "{{ ansible_os_family }}"
+           - Default IPV4 Address "{{ ansible_default_ipv4.address }}"  
+           - Ansible Default NIC Address "{{ ansible_eth0.macaddress }}"
+         dest: /tmp/system-updated-info1    

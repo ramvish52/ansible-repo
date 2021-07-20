@@ -1,0 +1,17 @@
+---
+ - name: Print system Info
+   hosts: debservers
+   gather_facts: yes
+   tasks:
+     - name: print processor info
+       debug:
+         msg: 
+           - no of cores "{{ ansible_processor_cores }}"
+           - os family "{{ ansible_os_family }}"
+           - Package Manager "{{ ansible_pkg_mgr }}" 
+           - Hostname "{{ ansible_hostname }}"
+           - Main IPv4 address "{{ ansible_default_ipv4.address }}"
+           - DNS Servers "{{ ansible_dns.nameservers }}"
+           - Kernel Version "{{ ansible_kernel }}"
+           - Main Disk First Partion size "{{ ansible_devices.nvme0n1.partitions.nvme0n1p1.size }}"
+

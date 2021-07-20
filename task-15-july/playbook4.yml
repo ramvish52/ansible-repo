@@ -1,0 +1,24 @@
+---
+ - name: Deploy Apache_server
+   hosts: all
+   tasks:
+     - name: Install httpd
+       yum:
+         name: httpd  
+         state: present
+       when: ansible_pkg_mgr == "dnf" 
+
+     - name: print processor info
+       debug:
+         msg: 
+           - no of cores "{{ ansible_processor_cores }}"
+           - os family "{{ ansible_os_family }}"
+           - Package Manager "{{ ansible_pkg_mgr }}" 
+
+     - name: save info to a file
+       copy:
+         content: 
+           - no of cores "{{ ansible_processor_cores }}\n"
+           - os family "{{ ansible_os_family }}\n"
+           - Package Manager "{{ ansible_pkg_mgr }}\n"
+         dest: /tmp/system-info.txt      

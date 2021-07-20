@@ -1,0 +1,31 @@
+---
+ - hosts: webserver
+   tasks:
+           - name: Install firewalld
+             yum:
+                     name: firewalld
+                     state: latest
+
+           - name: Start and enable firewalld
+             service: 
+                     name: firewalld
+                     state: started
+                     enabled: True
+
+           - name: enable http service in firewall
+             firewalld:
+                     service: http
+                     state: enabled
+                     permanent: yes
+
+           - name: enable 8080 port in firewall
+             firewalld:
+                     port: 8080/tcp
+                     state: enabled
+                     permanent: yes
+                     
+           - name: reload firwalld          
+             systemd:
+                     name: firewalld
+                     state: reloaded
+

@@ -1,0 +1,36 @@
+---
+ - hosts: webserver
+   tasks:
+     - name: install packages
+       yum:
+         name: "{{ item }}"
+         state: latest
+       with_items:
+         - httpd
+         - firewalld
+         - mariadb-server
+         - php
+         - php-mysqlnd
+   
+     - name: enable http service in firewall
+       firewalld:
+         service: http
+         permanent: true
+         state: enabled
+         immediate: yes
+
+     - name: start and enable services
+       service:
+         name: "{{ item }}"
+         state: started
+         enabled: true
+       with_items:
+         - httpd
+         - firewalld
+         - mariadb
+     
+     - name: create index.php page
+       copy:
+         src: index.php
+         dest: /var/www/html/index.php
+         mode: '0644'  

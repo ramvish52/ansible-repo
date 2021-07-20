@@ -1,0 +1,13 @@
+user: 
+  - dev
+  - mark
+  - jhon
+   
+
+pkg_name:
+  - httpd
+  - vsftpd
+  - wget
+  - git
+
+print_msg: Welcome to Ansible  

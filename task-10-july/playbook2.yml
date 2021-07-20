@@ -1,0 +1,15 @@
+---
+ - hosts: webserver
+   vars_files:
+     - variables.yml       
+   tasks:
+     - name: install {{ pkg_name }}
+       yum:
+         name: "{{ pkg_name }}"
+         state: latest
+
+     - name: start and enable {{ srv_name }}
+       service: 
+         name: "{{ srv_name }}"
+         state: started
+         enabled: true  

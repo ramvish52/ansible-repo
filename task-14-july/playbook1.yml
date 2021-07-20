@@ -1,0 +1,21 @@
+---
+ - hosts: debservers
+   vars_files:
+     - variables.yml    
+   tasks:
+     - name: create listed users
+       user:
+         name: "{{ item }}"
+         state: present
+       with_items: "{{ user }}"
+            
+     - name: install listed service
+       yum:
+         name: "{{ item }}"
+         state: latest
+       with_items: "{{ pkg_name }}"
+         #  - name: start and enable {{ pkg_name }}
+         #service:
+         #name: httpd
+         #state: restarted
+         #enabled: True  

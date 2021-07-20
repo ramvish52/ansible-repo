@@ -1,0 +1,15 @@
+---
+ - hosts: webserver
+   tasks:
+     - name: install ftp server
+       yum:
+         name: vsftpd
+         state: latest
+
+     - name: start and enable vsftpd
+       service:
+         name: vsftpd
+         state: started
+         enabled: True
+...   
+

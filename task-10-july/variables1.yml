@@ -1,0 +1,8 @@
+pkg_name:
+  - httpd 
+  - vsftpd
+  - wget
+  - git
+srv_name:
+  - httpd
+  - vsftpd    

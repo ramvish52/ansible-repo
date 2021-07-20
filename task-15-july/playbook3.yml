@@ -1,0 +1,9 @@
+---
+ - name: Deploy Apache_server
+   hosts: all
+   tasks:
+     - name: Install httpd
+       yum:
+         name: httpd  
+         state: present
+       when: ansible_pkg_mgr == "dnf"  

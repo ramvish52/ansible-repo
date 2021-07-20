@@ -1,0 +1,16 @@
+---
+ - hosts: webserver
+   vars:
+     grp_name: dev
+     user_name: rahul
+   tasks:
+     - name: create group {{ grp_name }} 
+       group:
+         name: "{{ grp_name }}"
+         state: present
+
+     - name: create user {{ user_name }}
+       user: 
+         name: "{{ user_name }}"
+         group: "{{ grp_name }}"
+         state: present     

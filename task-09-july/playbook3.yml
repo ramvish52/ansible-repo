@@ -1,0 +1,28 @@
+---
+ - hosts: webserver
+   tasks:
+     - name: Install git 
+       yum:
+         name: git
+         state: latest
+
+     - name: Install httpd
+       yum:
+         name: httpd
+         state: latest
+    
+     - name: create index page
+       copy:
+         content: "Create by Ansible Palybook"
+         dest: /var/www/html/index.html
+         mode: 0644
+         owner: root
+         group: root
+
+     - name: start and enabled httpd service
+       service:
+         name: httpd
+         state: started
+         enabled: True
+...         
+

@@ -1,0 +1,34 @@
+---
+ - hosts: webserver
+   vars:
+     firewall: firewalld
+   tasks:
+     - name: Include the variable file
+       include_vars: vars/main.yml
+  
+     - name: Include the tasks
+       include: tasks/main.yml
+  
+     - name: Install the firewall
+       yum:
+         name: "{{ firewall }}"
+         state: latest
+     
+     - name: start the firewall
+       service:
+         name: "{{ firewall }}"
+         state: started
+         enabled: true
+
+     - name: open the port the webserver
+       firewalld:
+         service: http
+         state: enabled
+         immediate: true
+         permanent: true
+
+     - name: create Index file
+       copy:
+         content: "{{ ansible_fqdn }}({{ ansible_default_ipv4.address }}) has been customuzed by Ansible\n"
+         dest: "{{ web_root }}/index.html"
+...         

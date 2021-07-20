@@ -1,0 +1,21 @@
+---
+ - hosts: debservers
+   vars_files:
+     - variables.yml
+   tasks:
+     - name: install {{ pkg_name }}
+       yum:
+         name: "{{ pkg_name }}"
+         state: latest
+     - name: create {{ user }}
+       user:
+         name: "{{ item }}"
+         state: present
+       with_items:
+         - "{{ user }}"      
+
+ - hosts: ubuntuservers
+   tasks:
+     - name: Print Message
+       debug:
+         msg: "{{ print_msg }}"

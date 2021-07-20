@@ -1,0 +1,11 @@
+[debservers]
+10.0.3.10 my_user=jhon
+10.0.3.204 my_user=mady
+
+
+[ubuntuservers]
+10.0.3.18
+10.0.3.94
+
+[debservers:vars]
+pkg_name=httpd

@@ -1,0 +1,16 @@
+---
+ - hosts: debservers
+   vars:
+     pkg_name: 
+       - httpd
+       - vsftpd  
+   tasks:
+     - name: install {{ pkg_name }}
+       yum:
+         name: "{{ pkg_name }}"
+         state: latest
+     
+     - name: start and enable {{ pkg_name }}
+       service:
+         name: "{{ pkg_name }}"
+         state: restarted

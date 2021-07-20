@@ -1,0 +1,21 @@
+---
+ - name: Deploy Apache_server
+   hosts: debservers
+   tasks:
+     - name: Install httpd
+       yum:
+         name: httpd  
+         state: present
+       register: web_package  
+
+     - name: start and enable service
+       service:
+         name: httpd
+         state: started
+         enabled: true
+       register: web_service
+     
+     - name: print statement
+       debug:
+         msg: "{{ web_package }}"
+         msg: " {{ web_service }}"       

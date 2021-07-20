@@ -1,0 +1,27 @@
+---
+ - hosts: debservers
+   vars:
+     user: joe
+   tasks:
+           - name: create user {{ user }}
+             user:
+                     name: "{{ user }}"
+                     state: present
+           - name: install {{ pkg_name }}
+             yum:
+                     name: "{{ pkg_name }}"
+                     state: latest       
+                     
+ - hosts: 10.0.3.10
+   tasks:
+           - name: create user {{ my_user }}
+             user:
+                     name: "{{ my_user }}"
+                     state: present
+
+ - hosts: 10.0.3.204
+   tasks:
+           - name: create user {{ my_user }}
+             user:
+                     name: "{{ my_user }}"
+                     state: present

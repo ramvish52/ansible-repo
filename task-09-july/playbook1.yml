@@ -1,0 +1,51 @@
+---
+ - hosts: webserver
+   tasks:     
+# create group
+    - name: create  'admin group'
+      group:
+        name: admingroup
+        state: present
+
+    - name: create 'developer group'
+      group:
+        name: developer
+        state: present 
+    
+  # create user
+    - name: create user 'admin1'
+      user:
+        name: admin1
+        group: admingroup
+        state: present      
+
+    - name: create user 'admin2'
+      user:
+        name: admin2
+        group: admingroup
+        state: present
+
+    - name: create user 'admin3'
+      user:
+        name: admin3
+        group: admingroup
+        state: present      
+        
+    - name: create user 'dev1'
+      user:
+        name: dev1
+        group: developer
+        state: present      
+        
+    - name: create user 'dev2'
+      user:
+        name: dev2
+        group: developer
+        state: present      
+        
+    - name: create user 'dev3'
+      user:
+        name: dev3
+        group: developer
+        state: present 
+...     

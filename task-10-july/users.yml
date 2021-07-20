@@ -1,0 +1,30 @@
+---
+ - hosts: webserver
+   tasks:
+     - name: create group
+       group:
+         name: "{{ item }}"
+         state: present
+       with_items:
+         - sales
+         - IT
+
+     - name: create user
+       user:
+         name: "{{ item }}"
+         group: sales
+         state: present
+       with_items:
+         - rajesh
+         - ramesh
+         - rakesh
+
+     - name: create user
+       user:
+         name: "{{ item }}"
+         group: IT
+         state: present
+       with_items:
+         - suresh
+         - shyam        
+

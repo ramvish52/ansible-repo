@@ -1,0 +1,11 @@
+---
+ - hosts: debservers
+   tasks:
+           - name: install {{ package }}
+             yum:
+                     name: "{{ package }}"
+                     state: latest
+           - name: add user {{ user }}
+             user:
+                     name: "{{ user }}"
+                     state: present          
