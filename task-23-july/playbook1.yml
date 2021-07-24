@@ -1,0 +1,35 @@
+---
+ - name: Implement Task
+   hosts: onpremises
+   tasks:
+     - name: create groups
+       group:
+         name: "{{ item }}"
+         state: present
+       with_items:
+         - developer
+         - administrator
+         - aws
+         - gcp
+     
+     - name: create user
+       user:
+         name: "{{ item }}"
+         state: present
+         group: developer
+         groups: aws,gcp
+         append: yes
+       with_items:
+         - kavery
+         - karishma       
+    
+     - name: create user
+       user:
+         name: "{{ item }}"
+         state: present
+         group: administrator
+         groups: aws,gcp
+         append: yes
+       with_items:
+         - ram
+         - nitesh      

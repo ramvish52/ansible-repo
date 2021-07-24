@@ -1,0 +1,12 @@
+db_package: mariadb-server
+db_service: mariadb
+my_groups:
+  - developer
+  - administrator
+  - aws
+  - gcp
+my_user:
+  - kavery
+  - karishma
+  - ram
+  - nitesh

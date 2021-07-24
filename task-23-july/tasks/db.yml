@@ -1,0 +1,28 @@
+---
+ - name: Install Mariadb Server
+   yum:
+     name: "{{ db_package }}"
+     state: present
+   when: ansible_memtotal_mb >= 1000 and ansible_os_family == 'RedHat'  
+   register: yum_result
+ - debug:
+     msg: "{{ yum_result }}"    
+
+ - name: start and enable mariadb servic
+   service:
+     name: "{{ db_service }}"
+     state: started
+     enabled: true        
+   tags: start_db
+   when: yum_result.rc == 0 
+
+ - name: create user lisa
+   user:
+     name: lisa
+     state: present
+   when: ansible_os_family == 'RedHat'      
+
+ - name: notify admin
+   debug:
+     msg: check mariadb-server
+   when: yum_result.rc != 0       

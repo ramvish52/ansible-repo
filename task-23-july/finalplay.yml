@@ -1,0 +1,9 @@
+---
+ - name: Implementing Tasks
+   hosts: onpremises
+   tasks:
+     - name: Install Mariadb-server
+       include: tasks/db.yml 
+
+     - name: Create user and groups
+       include:  tasks/user.yml     

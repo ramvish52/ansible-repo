@@ -1,0 +1,16 @@
+---
+ - name: Install Mariadb-server
+   hosts: onpremises
+   tasks:
+     - name: Install Mariadb Server
+       yum:
+         name: mariadb-server
+         state: present
+       when: ansible_memtotal_mb >= 1000 and ansible_os_family == 'RedHat'  
+   
+     - name: start and enable mariadb service
+       service:
+         name: mariadb
+         state: started
+         enabled: true        
+           

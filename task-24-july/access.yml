@@ -1,0 +1,15 @@
+---
+ - hosts: onpremises
+   tasks:
+     - block:
+         - name: Access website
+           uri:
+             url: https://google.com
+             status_code: 200
+         - name: access content
+           debug:
+             msg: "I am access"
+       rescue:
+         - name: not access content
+           debug:
+             msg: "I am unable to access website"           

@@ -1,0 +1,45 @@
+---
+ - hosts: onpremises
+   tasks:
+     - name: Install HTTPD Server
+       yum:
+         name: httpd
+         state: latest
+
+     - name: Start and enable HTTPD service
+       service:
+         name: httpd
+         state: started
+         enabled: true
+            
+     - name: Create Index Page
+       copy:
+         src: index.html
+         dest: /var/www/html
+         owner: root
+         group: root
+         mode: 644
+       notify: restart_httpd      
+
+     - name: create user sneha
+       user:
+         name: sneha 
+         state: present
+       register: user_add
+       notify: debug_msg
+
+   handlers:      
+     - name: restart_httpd
+       service:
+         name: httpd
+         state: restarted
+       notify: debug_msg  
+
+     - name: debug_msg    
+       debug:
+         msg: "Index page chagned, service restartd"      
+         
+     
+     - name: debug_msg
+       debug:
+         msg: "{{ user_add }}"

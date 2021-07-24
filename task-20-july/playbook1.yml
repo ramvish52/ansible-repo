@@ -1,0 +1,26 @@
+---
+ - hosts: webserver
+   tasks:
+           - name: Install services
+             yum:
+                     name: "{{ item }}"
+                     state: latest
+             with_items:
+                     - httpd
+                     - vsftpd
+                     - git
+                     - wget 
+# second method
+
+ - hosts: webserver
+   vars:
+     mail_svc:      
+       - firewalld
+       - postfix
+   tasks:
+     - name: Install Packages
+       yum:
+         name: "{{ item }}"
+         state: latest
+       with_items: "{{ mail_svc }}"      
+           

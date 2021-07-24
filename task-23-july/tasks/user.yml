@@ -1,0 +1,19 @@
+---
+ - name: create groups
+   group:
+     name: "{{ item }}"
+     state: present
+   with_items: "{{ my_groups }}"
+
+ - name: create users
+   user:
+     name: "{{ item.name }}"
+     state: present
+     append: yes
+     group: "{{ item.group }}"
+     groups: "{{ item.groups }}"
+   with_items:
+     - { name: 'kavery', group: 'developer', groups: 'aws,gcp' }
+     - { name: 'karishma', group: 'developer', groups: 'aws,gcp' }         
+     - { name: 'ram', group: 'administrator', groups: 'aws,gcp' }         
+     - { name: 'nitesh', group: 'administrator', groups: 'aws,gcp' }         

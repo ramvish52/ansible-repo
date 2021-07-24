@@ -1,0 +1,17 @@
+---
+ - hosts: onpremises
+   tasks:
+     - block:      
+         - name: Install HTTPD Server
+           yum:
+             name: httpde
+             state: latest
+       rescue:
+         - name: run if task defined in block is failed
+           debug:
+             msg: "Notify Admin User"     
+       
+       always:
+         - name: run if task defined in block in fail/pass
+           debug:
+             msg: "Run Always"      

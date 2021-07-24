@@ -1,0 +1,16 @@
+---
+ - hosts: webserver
+   tasks:
+     - name: create group 
+       group:
+         name: office
+         state: present
+
+     - name: create user
+       user:
+         name: "{{ item.name }}"
+         state: present
+         groups: "{{ item.groups }}"
+       with_items:
+         - { name: 'joy', groups: 'office' }
+         - { name: 'honey', groups: 'office' }        
